@@ -31,6 +31,8 @@ class CustomCalendar extends StatefulWidget {
   /// A function to be called when the selected date range changes
   final Function(DateTime, DateTime)? startEndDateChange;
 
+  final TextStyle? dateTextStyle;
+
   const CustomCalendar({
     Key? key,
     this.initialStartDate,
@@ -39,6 +41,7 @@ class CustomCalendar extends StatefulWidget {
     this.minimumDate,
     this.maximumDate,
     required this.primaryColor,
+    this.dateTextStyle,
   }) : super(key: key);
 
   @override
@@ -134,11 +137,12 @@ class CustomCalendarState extends State<CustomCalendar> {
                 child: Center(
                   child: Text(
                     DateFormat('MMMM, yyyy').format(currentMonthDate),
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 20,
-                      color: Colors.grey.shade700,
-                    ),
+                    style: widget.dateTextStyle ??
+                        TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          color: Colors.grey.shade700,
+                        ),
                   ),
                 ),
               ),

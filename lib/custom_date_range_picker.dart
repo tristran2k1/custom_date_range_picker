@@ -45,6 +45,10 @@ class CustomDateRangePicker extends StatefulWidget {
   /// A callback function that is called when the user cancels the selection of the date range.
   final Function() onCancelClick;
 
+  final String? fromLabel, toLabel;
+  final TextStyle? labelStyle;
+  final TextStyle? dateTextStyle;
+
   const CustomDateRangePicker({
     Key? key,
     this.initialStartDate,
@@ -56,6 +60,10 @@ class CustomDateRangePicker extends StatefulWidget {
     required this.minimumDate,
     required this.maximumDate,
     required this.onCancelClick,
+    this.fromLabel,
+    this.toLabel,
+    this.labelStyle,
+    this.dateTextStyle,
   }) : super(key: key);
 
   @override
@@ -131,13 +139,14 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker>
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Text(
-                                  'From',
+                                  widget.fromLabel ?? 'From',
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 16,
-                                    color: Colors.grey.shade700,
-                                  ),
+                                  style: widget.labelStyle ??
+                                      TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 16,
+                                        color: Colors.grey.shade700,
+                                      ),
                                 ),
                                 const SizedBox(
                                   height: 4,
@@ -147,11 +156,12 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker>
                                       ? DateFormat('EEE, dd MMM')
                                           .format(startDate!)
                                       : '--/-- ',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    color: Colors.grey.shade700,
-                                  ),
+                                  style: widget.dateTextStyle ??
+                                      TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.grey.shade700,
+                                      ),
                                 ),
                               ],
                             ),
@@ -167,12 +177,13 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker>
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Text(
-                                  'To',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 16,
-                                    color: Colors.grey.shade700,
-                                  ),
+                                  widget.toLabel ?? 'To',
+                                  style: widget.labelStyle ??
+                                      TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 16,
+                                        color: Colors.grey.shade700,
+                                      ),
                                 ),
                                 const SizedBox(
                                   height: 4,
@@ -182,11 +193,12 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker>
                                       ? DateFormat('EEE, dd MMM')
                                           .format(endDate!)
                                       : '--/-- ',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    color: Colors.grey.shade700,
-                                  ),
+                                  style: widget.dateTextStyle ??
+                                      TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.grey.shade700,
+                                      ),
                                 ),
                               ],
                             ),
@@ -322,19 +334,18 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker>
 /// `primaryColor` The primary color of the dialog.
 /// `fontFamily` The font family to use for the text in the dialog.
 
-void showCustomDateRangePicker(
-  BuildContext context, {
-  required bool dismissible,
-  required DateTime minimumDate,
-  required DateTime maximumDate,
-  DateTime? startDate,
-  DateTime? endDate,
-  required Function(DateTime startDate, DateTime endDate) onApplyClick,
-  required Function() onCancelClick,
-  required Color backgroundColor,
-  required Color primaryColor,
-  String? fontFamily,
-}) {
+void showCustomDateRangePicker(BuildContext context,
+    {required bool dismissible,
+    required DateTime minimumDate,
+    required DateTime maximumDate,
+    DateTime? startDate,
+    DateTime? endDate,
+    required Function(DateTime startDate, DateTime endDate) onApplyClick,
+    required Function() onCancelClick,
+    required Color backgroundColor,
+    required Color primaryColor,
+    String? fontFamily,
+    TextStyle? headerTextStyle}) {
   /// Request focus to take it away from any input field that might be in focus
   FocusScope.of(context).requestFocus(FocusNode());
 
