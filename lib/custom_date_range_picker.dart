@@ -214,6 +214,7 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker>
                         initialEndDate: widget.initialEndDate,
                         initialStartDate: widget.initialStartDate,
                         primaryColor: widget.primaryColor,
+                        dateTextStyle: widget.dateTextStyle,
                         startEndDateChange:
                             (DateTime startDateData, DateTime endDateData) {
                           setState(() {
