@@ -334,18 +334,23 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker>
 /// `primaryColor` The primary color of the dialog.
 /// `fontFamily` The font family to use for the text in the dialog.
 
-void showCustomDateRangePicker(BuildContext context,
-    {required bool dismissible,
-    required DateTime minimumDate,
-    required DateTime maximumDate,
-    DateTime? startDate,
-    DateTime? endDate,
-    required Function(DateTime startDate, DateTime endDate) onApplyClick,
-    required Function() onCancelClick,
-    required Color backgroundColor,
-    required Color primaryColor,
-    String? fontFamily,
-    TextStyle? headerTextStyle}) {
+void showCustomDateRangePicker(
+  BuildContext context, {
+  required bool dismissible,
+  required DateTime minimumDate,
+  required DateTime maximumDate,
+  DateTime? startDate,
+  DateTime? endDate,
+  required Function(DateTime startDate, DateTime endDate) onApplyClick,
+  required Function() onCancelClick,
+  required Color backgroundColor,
+  required Color primaryColor,
+  String? fontFamily,
+  String? fromLabel,
+  String? toLabel,
+  TextStyle? labelStyle,
+  TextStyle? dateTextStyle,
+}) {
   /// Request focus to take it away from any input field that might be in focus
   FocusScope.of(context).requestFocus(FocusNode());
 
@@ -362,6 +367,10 @@ void showCustomDateRangePicker(BuildContext context,
       initialEndDate: endDate,
       onApplyClick: onApplyClick,
       onCancelClick: onCancelClick,
+      fromLabel: fromLabel,
+      toLabel: toLabel,
+      labelStyle: labelStyle,
+      dateTextStyle: dateTextStyle,
     ),
   );
 }
